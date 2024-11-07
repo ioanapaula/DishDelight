@@ -1,23 +1,35 @@
-package com.example.dishdelight.data
+
+import com.example.dishdelight.data.NetworkUtils
+import com.example.dishdelight.data.Recipe
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
 
 class RecipeRepository {
+    private val apiUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=lamb"
 
-    fun getRecipes(): List<Recipe>{
-        // temporary hardcoded list of recipe
-        val recipe1 = Recipe("Grilled cheese", "url1", "")
-        val recipe2 = Recipe("Chicken saltimboca", "url1", "")
-        val recipe3 = Recipe("Caprese salad", "url1", "")
-        val recipe4 = Recipe("Caesar salad", "url1", "")
-        val recipe5 = Recipe("Sushi", "url1", "")
-        val recipe6 = Recipe("Ramen", "url1", "")
-        val recipe7 = Recipe("Butter chicken", "url1", "")
-        val recipe8 = Recipe("Egg fried rice", "url1", "")
-        val recipe9 = Recipe("Mashed potatoes", "url1", "")
-        val recipe10 = Recipe("Spaghetti carbonara", "url1", "")
+    suspend fun getRecipes(): List<Recipe> {
+        return withContext(Dispatchers.IO) {
+            val response = NetworkUtils.get(apiUrl)
+            parseRecipes(response)
+        }
+    }
 
-        val recipes = listOf(recipe1, recipe2, recipe3, recipe4, recipe5, recipe6, recipe7, recipe8, recipe9, recipe10)
+    private fun parseRecipes(response: String): List<Recipe> {
+        val recipes = mutableListOf<Recipe>()
+        val jsonObject = JSONObject(response)
+        val jsonArray = jsonObject.getJSONArray("meals")
 
-        // Implement API call using Retrofit or another networking library
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val recipe = Recipe(
+                title = jsonObject.getString("strMeal"),
+                imageUrl = jsonObject.getString("strMealThumb")
+            )
+            recipes.add(recipe)
+        }
+
         return recipes
     }
 }

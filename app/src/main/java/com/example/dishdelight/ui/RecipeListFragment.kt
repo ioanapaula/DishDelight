@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dishdelight.R
@@ -32,7 +33,11 @@ class RecipeListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        adapter.submitList(viewModel.recipes)
+        viewModel.recipes.observe(viewLifecycleOwner) { recipes ->
+            recipes?.let {
+                adapter.submitList(it)
+            }
+        }
 
         return binding.root
     }
