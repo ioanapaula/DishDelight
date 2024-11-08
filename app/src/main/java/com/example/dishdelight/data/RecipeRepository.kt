@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class RecipeRepository {
-    private val testApiUrl = "https://www.themealdb.com/api/json/v1/1/filter.php?c=lamb"
+    private val recipesByCategory = "https://www.themealdb.com/api/json/v1/1/filter.php?c="
     private val categoriesUrl = "https://www.themealdb.com/api/json/v1/1/categories.php"
 
     suspend fun getCategories(): List<Category> {
@@ -36,9 +36,9 @@ class RecipeRepository {
         return categories
     }
 
-    suspend fun getRecipes(): List<Recipe> {
+    suspend fun getRecipes(recipeCategory: String): List<Recipe> {
         return withContext(Dispatchers.IO) {
-            val response = NetworkUtils.get(testApiUrl)
+            val response = NetworkUtils.get(recipesByCategory + recipeCategory)
             parseRecipes(response)
         }
     }

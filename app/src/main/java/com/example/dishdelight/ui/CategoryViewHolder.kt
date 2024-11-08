@@ -6,8 +6,15 @@ import com.example.dishdelight.data.Category
 import com.example.dishdelight.databinding.CellCategoryItemBinding
 
 class CategoryViewHolder(
-    private val binding: CellCategoryItemBinding)
+    private val binding: CellCategoryItemBinding,
+    private val onCategoryClick: (Category) -> Unit)
     : RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        itemView.setOnClickListener {
+            onCategoryClick(binding.category!!)
+        }
+    }
 
     fun bind(category: Category) {
         binding.category = category

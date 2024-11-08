@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dishdelight.R
 import com.example.dishdelight.data.CategoryListViewModel
@@ -27,7 +28,10 @@ class CategoryListFragment : Fragment() {
         binding.categoryListViewModel = viewModel
         binding.lifecycleOwner = this
 
-        adapter = CategoryAdapter()
+        adapter = CategoryAdapter { category ->
+            val action = CategoryListFragmentDirections.actionCategoryListFragmentToRecipeListFragment(category.title)
+            findNavController().navigate(action)
+        }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 

@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dishdelight.R
 import com.example.dishdelight.data.RecipeListViewModel
@@ -24,14 +26,18 @@ class RecipeListFragment : Fragment() {
         val binding: FragmentRecipeListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_recipe_list, container, false
         )
+        val args: RecipeListFragmentArgs by navArgs()
+        val categoryName = args.categoryName
 
         viewModel = ViewModelProvider(this)[RecipeListViewModel::class.java]
+        // temporary way to pass the category name to the ViewModel
+        viewModel.run { fetchRecipes(categoryName) }
         binding.recipeListViewModel = viewModel
         binding.lifecycleOwner = this
 
         adapter = RecipeAdapter()
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         viewModel.recipes.observe(viewLifecycleOwner) { recipes ->
             recipes?.let {
