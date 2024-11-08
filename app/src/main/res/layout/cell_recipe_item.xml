@@ -7,17 +7,24 @@
             name="recipe"
             type="com.example.dishdelight.data.Recipe" />
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:padding="12dp">
+        <ImageView
+            android:id="@+id/recipe_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="12dp"
+            android:scaleType="centerCrop"/>
         <TextView
             android:id="@+id/recipe_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="12dp"
-            android:paddingStart="4dp"
+            android:layout_toEndOf="@id/recipe_image"
+            android:layout_centerVertical="true"
             android:textColor="@color/black"
             android:text="@{recipe.title}"/>
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
