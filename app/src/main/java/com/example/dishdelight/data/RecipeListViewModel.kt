@@ -12,16 +12,17 @@ import kotlinx.coroutines.launch
 class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: RecipeRepository = RecipeRepository()
     private val _recipes = MutableLiveData<List<Recipe>>()
+
     val recipes: LiveData<List<Recipe>> = _recipes
 
-    init {
-        fetchRecipes()
-    }
+//    init {
+//        fetchRecipes()
+//    }
 
-    private fun fetchRecipes() {
+    fun fetchRecipes(category: String) {
         viewModelScope.launch {
             try {
-                val recipes = repository.getRecipes()
+                val recipes = repository.getRecipes(category)
                 _recipes.value = recipes
             } catch (e: Exception) {
                 Log.e("RecipeListTag", e.message, e)

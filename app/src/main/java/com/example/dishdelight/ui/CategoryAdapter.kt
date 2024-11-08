@@ -8,12 +8,15 @@ import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.databinding.CellCategoryItemBinding
 import com.example.dishdelight.databinding.CellRecipeItemBinding
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryViewHolder>() {
-    private var categoryList: List<Category> = emptyList() // Replace Recipe with your dataclass
+class CategoryAdapter(
+    private val onCategoryClick: (Category) -> Unit)
+    : RecyclerView.Adapter<CategoryViewHolder>() {
+
+    private var categoryList: List<Category> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding = CellCategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoryViewHolder(binding)
+        return CategoryViewHolder(binding, onCategoryClick)
     }
 
     override fun getItemCount(): Int {
