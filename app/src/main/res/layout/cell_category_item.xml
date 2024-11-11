@@ -9,14 +9,13 @@
     </data>
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/category_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="128dp"
+            android:layout_height="80dp"
             android:layout_alignParentStart="true"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="@dimen/spacing_xs"
             android:scaleType="centerCrop"/>
         <TextView
             android:id="@+id/category_title"
@@ -24,17 +23,17 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/category_image"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:text="@{category.title}"/>
         <TextView
             android:id="@+id/category_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/category_title"
             android:layout_toEndOf="@id/category_image"
+            android:layout_alignBottom="@id/category_image"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:maxLines="3"
             android:ellipsize="end"
             android:text="@{category.details}"/>

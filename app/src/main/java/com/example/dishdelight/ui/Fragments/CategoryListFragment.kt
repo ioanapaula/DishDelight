@@ -1,5 +1,6 @@
-package com.example.dishdelight.ui
+package com.example.dishdelight.ui.Fragments
 
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,9 +10,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dishdelight.R
 import com.example.dishdelight.data.CategoryListViewModel
 import com.example.dishdelight.databinding.FragmentCategoryListBinding
+import com.example.dishdelight.ui.Adapters.CategoryAdapter
 
 class CategoryListFragment : Fragment() {
     private lateinit var viewModel: CategoryListViewModel
@@ -32,6 +35,9 @@ class CategoryListFragment : Fragment() {
             val action = CategoryListFragmentDirections.actionCategoryListFragmentToRecipeListFragment(category.title)
             findNavController().navigate(action)
         }
+        val insetDecoration = VerticalItemDecoration(12)
+
+        binding.recyclerView.addItemDecoration(insetDecoration)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -44,4 +50,16 @@ class CategoryListFragment : Fragment() {
         return binding.root
     }
 
+}
+
+class VerticalItemDecoration(private val spacing: Int) : RecyclerView.ItemDecoration() {
+
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        outRect.set(0, spacing, 0, spacing)
+    }
 }

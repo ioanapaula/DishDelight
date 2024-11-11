@@ -5,7 +5,8 @@
     app:startDestination="@id/categoryListFragment">
     <fragment
         android:id="@+id/categoryListFragment"
-        android:name="com.example.dishdelight.ui.CategoryListFragment"
+        android:name="com.example.dishdelight.ui.Fragments.CategoryListFragment"
+        android:label="@string/categories_list_title"
         tools:layout="@layout/fragment_category_list" >
         <action
             android:id="@+id/action_categoryListFragment_to_recipeListFragment"
@@ -19,16 +20,29 @@
     </fragment>
     <fragment
         android:id="@+id/recipeListFragment"
-        android:name="com.example.dishdelight.ui.RecipeListFragment"
+        android:name="com.example.dishdelight.ui.Fragments.RecipeListFragment"
+        android:label="@string/recipe_list_title"
         tools:layout="@layout/fragment_recipe_list">
         <argument
             android:name="categoryName"
             app:argType="string" />
         <action
             android:id="@+id/action_recipeListFragment_to_recipeDetailsFragment"
-            app:destination="@id/recipeDetailsFragment" />
+            app:destination="@id/recipeDetailsFragment">
+            <argument
+                android:name="recipeId"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/recipeDetailsFragment"
-        tools:layout="@layout/fragment_recipe_details" />
+        android:name="com.example.dishdelight.ui.Fragments.RecipeDetailsFragment"
+        android:label="@string/recipe_details_title"
+        tools:layout="@layout/fragment_recipe_details">
+        <argument
+            android:name="recipeId"
+            app:argType="string" />
+    </fragment>
 </navigation>
