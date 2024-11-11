@@ -1,12 +1,11 @@
-package com.example.dishdelight.ui
+package com.example.dishdelight.ui.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dishdelight.data.Category
-import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.databinding.CellCategoryItemBinding
-import com.example.dishdelight.databinding.CellRecipeItemBinding
+import com.example.dishdelight.ui.ViewHolders.CategoryViewHolder
 
 class CategoryAdapter(
     private val onCategoryClick: (Category) -> Unit)

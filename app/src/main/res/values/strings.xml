@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">DishDelight</string>
+    <string name="app_name">Dish Delight</string>
     <string name="title_activity_main">MainActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recipe_list_title">Recipes</string>
+    <string name="recipe_details_title">Recipe Details</string>
+    <string name="categories_list_title">Categories</string>
+    <string name="recipe_details_category">Category: %s</string>
+    <string name="recipe_details_area">Area: %s</string>
+    <string name="recipe_details_ingredients_title">What you\'ll need:</string>
+    <string name="recipe_details_instructions_title">How to make %s:</string>
 </resources>
