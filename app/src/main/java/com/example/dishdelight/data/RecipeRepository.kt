@@ -28,6 +28,7 @@ class RecipeRepository {
         for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
             val category = Category(
+                id = jsonObject.getString("idCategory"),
                 title = jsonObject.getString("strCategory"),
                 details = jsonObject.getString("strCategoryDescription"),
                 imageUrl = jsonObject.getString("strCategoryThumb")

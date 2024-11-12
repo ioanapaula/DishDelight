@@ -2,6 +2,8 @@ package com.example.dishdelight.ui.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.databinding.CellRecipeItemBinding
@@ -9,9 +11,7 @@ import com.example.dishdelight.ui.ViewHolders.RecipeViewHolder
 
 class RecipeAdapter(
     private val onRecipeClick: (Recipe) -> Unit)
-    : RecyclerView.Adapter<RecipeViewHolder>() {
-
-    private var recipeList: List<Recipe> = emptyList()
+    : ListAdapter<Recipe, RecipeViewHolder>(RecipeDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val binding = CellRecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,16 +19,21 @@ class RecipeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val recipe = recipeList[position]
+        val recipe = getItem(position)
         holder.bind(recipe)
     }
 
     override fun getItemCount(): Int {
-        return recipeList.size
+        return currentList.size
+    }
+}
+
+object RecipeDiffCallback: DiffUtil.ItemCallback<Recipe>() {
+    override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
+        return oldItem == newItem
     }
 
-    fun submitList(recipes: List<Recipe>) {
-        recipeList = recipes
-        notifyDataSetChanged()
+    override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean {
+        return oldItem.id == newItem.id
     }
 }
