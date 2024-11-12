@@ -2,16 +2,15 @@ package com.example.dishdelight.ui.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.example.dishdelight.data.Category
 import com.example.dishdelight.databinding.CellCategoryItemBinding
 import com.example.dishdelight.ui.ViewHolders.CategoryViewHolder
 
 class CategoryAdapter(
     private val onCategoryClick: (Category) -> Unit)
-    : RecyclerView.Adapter<CategoryViewHolder>() {
-
-    private var categoryList: List<Category> = emptyList()
+    : ListAdapter<Category, CategoryViewHolder>(CategoryDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding = CellCategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,16 +18,21 @@ class CategoryAdapter(
     }
 
     override fun getItemCount(): Int {
-        return categoryList.size
+        return currentList.size
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val recipe = categoryList[position]
+        val recipe = getItem(position)
         holder.bind(recipe)
     }
+}
 
-    fun submitList(categories: List<Category>) {
-        categoryList = categories
-        notifyDataSetChanged()
+object CategoryDiffCallback : DiffUtil.ItemCallback<Category>() {
+    override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
+        return oldItem.id == newItem.id
     }
 }
