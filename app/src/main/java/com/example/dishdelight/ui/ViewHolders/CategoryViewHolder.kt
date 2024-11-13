@@ -2,6 +2,7 @@ package com.example.dishdelight.ui.ViewHolders
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.dishdelight.R
 import com.example.dishdelight.data.Category
 import com.example.dishdelight.databinding.CellCategoryItemBinding
 
@@ -23,6 +24,8 @@ class CategoryViewHolder(
         val imageView = binding.categoryImage
         imageView.load(category.imageUrl) {
             crossfade(true)
+            placeholder(R.drawable.ic_file_placeholder)
+            error(R.drawable.ic_error)
         }
     }
 }

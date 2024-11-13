@@ -1,9 +1,16 @@
 package com.example.dishdelight.ui.Fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -12,6 +19,9 @@ import coil.load
 import com.example.dishdelight.data.RecipeDetailsViewModel
 import com.example.dishdelight.databinding.FragmentRecipeDetailsBinding
 import com.example.dishdelight.ui.Adapters.IngredientAdapter
+import android.graphics.Typeface
+import com.example.dishdelight.R
+import com.example.dishdelight.data.RecipeDetails
 
 class RecipeDetailsFragment: Fragment() {
     private lateinit var viewModel: RecipeDetailsViewModel
@@ -48,13 +58,46 @@ class RecipeDetailsFragment: Fragment() {
             val imageView = binding.recipeImage
             imageView.load(details.imageUrl) {
                 crossfade(true)
-                //placeholder(R.drawable.placeholder_image)
-                //error(R.drawable.error_image)
+                placeholder(R.drawable.ic_file_placeholder)
+                error(R.drawable.ic_error)
             }
 
             ingredientAdapter = IngredientAdapter(details.ingredients)
             binding.ingredientsRecyclerView.adapter = ingredientAdapter
             binding.ingredientsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+            binding.recipeTags.visibility = if (details.tags.isNotEmpty() && details.tags != "null") View.VISIBLE else View.GONE
+            binding.recipeFullDetailsButton.visibility = if (details.recipeSourceUrl.isNotEmpty() && details.recipeSourceUrl != "null") View.VISIBLE else View.GONE
+
+            binding.recipeFullDetailsButton.text = getString(R.string.recipe_details_source, extractDomain(details.recipeSourceUrl))
+            binding.recipeFullDetailsButton.setOnClickListener {
+                val url = details.recipeSourceUrl
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
+
+            binding.recipeVideoButton.setOnClickListener {
+                val url = details.youtubeUrl
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
         }
+    }
+
+    private fun extractDomain(url: String): String {
+        val regex = Regex("https?://(www\\.)?([a-zA-Z0-9.-]+).*")
+        val matchResult = regex.find(url)
+        return matchResult?.groups?.get(2)?.value ?: url
+    }
+
+    @BindingAdapter("boldSubstring")
+    fun TextView.boldSubstring(substring: String) {
+        val text = this.text.toString()
+        val spannableString = SpannableString(text)
+        val startIndex = text.indexOf(substring)
+        val endIndex = startIndex + substring.length
+        val styleSpan = StyleSpan(Typeface.BOLD)
+        spannableString.setSpan(styleSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.text = spannableString
     }
 }

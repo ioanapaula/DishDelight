@@ -2,6 +2,7 @@ package com.example.dishdelight.ui.ViewHolders
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.dishdelight.R
 import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.databinding.CellRecipeItemBinding
 
@@ -23,8 +24,8 @@ class RecipeViewHolder(
         val imageView = binding.recipeImage
         imageView.load(recipe.imageUrl + "/preview") {
             crossfade(true)
-            //placeholder(R.drawable.placeholder_image)
-            //error(R.drawable.error_image)
+            placeholder(R.drawable.ic_file_placeholder)
+            error(R.drawable.ic_error)
         }
     }
 }
