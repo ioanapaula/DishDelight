@@ -20,6 +20,7 @@ import com.example.dishdelight.data.RecipeDetailsViewModel
 import com.example.dishdelight.databinding.FragmentRecipeDetailsBinding
 import com.example.dishdelight.ui.Adapters.IngredientAdapter
 import android.graphics.Typeface
+import android.text.style.AbsoluteSizeSpan
 import com.example.dishdelight.R
 import com.example.dishdelight.data.RecipeDetails
 
@@ -66,10 +67,21 @@ class RecipeDetailsFragment: Fragment() {
             binding.ingredientsRecyclerView.adapter = ingredientAdapter
             binding.ingredientsRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
+            binding.recipeCategory.text = getString(R.string.recipe_details_category, details.category)
+            binding.recipeCategory.boldSubstring("Category:")
+
+            binding.recipeArea.text = getString(R.string.recipe_details_area, details.area)
+            binding.recipeArea.boldSubstring("Area:")
+
+            binding.recipeTags.text = getString(R.string.recipe_details_tags, details.tags)
+            binding.recipeTags.boldSubstring("Keywords:")
+
             binding.recipeTags.visibility = if (details.tags.isNotEmpty() && details.tags != "null") View.VISIBLE else View.GONE
             binding.recipeFullDetailsButton.visibility = if (details.recipeSourceUrl.isNotEmpty() && details.recipeSourceUrl != "null") View.VISIBLE else View.GONE
 
-            binding.recipeFullDetailsButton.text = getString(R.string.recipe_details_source, extractDomain(details.recipeSourceUrl))
+            val recipeDomain = extractDomain(details.recipeSourceUrl)
+            binding.recipeFullDetailsButton.text = getString(R.string.recipe_details_source, recipeDomain)
+            binding.recipeFullDetailsButton.sizeSubstring(recipeDomain, 12)
             binding.recipeFullDetailsButton.setOnClickListener {
                 val url = details.recipeSourceUrl
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -90,7 +102,6 @@ class RecipeDetailsFragment: Fragment() {
         return matchResult?.groups?.get(2)?.value ?: url
     }
 
-    @BindingAdapter("boldSubstring")
     fun TextView.boldSubstring(substring: String) {
         val text = this.text.toString()
         val spannableString = SpannableString(text)
@@ -98,6 +109,16 @@ class RecipeDetailsFragment: Fragment() {
         val endIndex = startIndex + substring.length
         val styleSpan = StyleSpan(Typeface.BOLD)
         spannableString.setSpan(styleSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.text = spannableString
+    }
+
+    fun TextView.sizeSubstring(substring: String, sizeSp: Int) {
+        val text = this.text.toString()
+        val spannableString = SpannableString(text)
+        val startIndex = text.indexOf(substring)
+        val endIndex = startIndex + substring.length
+        val sizeSpan = AbsoluteSizeSpan(sizeSp, true)
+        spannableString.setSpan(sizeSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         this.text = spannableString
     }
 }

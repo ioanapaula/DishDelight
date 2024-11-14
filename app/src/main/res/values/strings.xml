@@ -9,6 +9,6 @@
     <string name="recipe_details_tags">Keywords: %s</string>
     <string name="recipe_details_ingredients_title">What you\'ll need:</string>
     <string name="recipe_details_instructions_title">How to make %s:</string>
-    <string name="recipe_details_source">View Full Recipe
-        \n%s</string>
+    <string name="recipe_details_source">View Full Recipe\n%s</string>
+    <string name="recipe_video_button">Watch Video</string>
 </resources>
