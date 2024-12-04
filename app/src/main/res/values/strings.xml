@@ -7,8 +7,12 @@
     <string name="recipe_details_category">Category: %s</string>
     <string name="recipe_details_area">Area: %s</string>
     <string name="recipe_details_tags">Keywords: %s</string>
+    <string name="recipe_details_category_bold">Category: </string>
+    <string name="recipe_details_area_bold">Area: </string>
+    <string name="recipe_details_tags_bold">Keywords: </string>
     <string name="recipe_details_ingredients_title">What you\'ll need:</string>
     <string name="recipe_details_instructions_title">How to make %s:</string>
     <string name="recipe_details_source">View Full Recipe\n%s</string>
+    <string name="recipe_details_source_bold">View Full Recipe\n</string>
     <string name="recipe_video_button">Watch Video</string>
 </resources>
