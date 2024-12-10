@@ -1,4 +1,4 @@
-**DishDelight** is an Android mobile application developed in **Kotlin**. This project was created to enhance my Kotlin skills and explore various Android development concepts. 
+**DishDelight** is an Android mobile application developed in **Kotlin**. This project was created as a platform to explore JetpackCompose. 
 
 Features
 
