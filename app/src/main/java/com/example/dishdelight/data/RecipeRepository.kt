@@ -43,7 +43,7 @@ class RecipeRepository {
         } catch (e: Exception) {
             Log.e("Repository", "Error fetching recipe details: ${e.message}", e)
             // temporary handling of error scenario
-            RecipeDetails("", "", "", "", "", "", "", "", "")
+            RecipeDetails("", "", "", "", "", "", "", "", "", emptyList())
         }
     }
 }

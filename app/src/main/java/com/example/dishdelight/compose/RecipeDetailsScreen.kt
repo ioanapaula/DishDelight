@@ -172,21 +172,21 @@ fun RecipeDetails(
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-//                Column {
-//                    recipeDetails.ingredients.chunked(2).forEach{
-//                        rowItems ->
-//                            Row(modifier = Modifier.fillMaxWidth()) {
-//                                rowItems.forEach { ingredient ->
-//                                    Text(
-//                                        modifier = Modifier
-//                                            .padding(0.dp, 4.dp)
-//                                            .weight(1f),
-//                                        text = "${ingredient.measure} ${ingredient.name}"
-//                                    )
-//                                }
-//                            }
-//                    }
-//                }
+                Column {
+                    recipeDetails.ingredients.chunked(2).forEach{
+                        rowItems ->
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                rowItems.forEach { ingredient ->
+                                    Text(
+                                        modifier = Modifier
+                                            .padding(0.dp, 4.dp)
+                                            .weight(1f),
+                                        text = "${ingredient.measure} ${ingredient.name}"
+                                    )
+                                }
+                            }
+                    }
+                }
                 ExpandableCard(
                     title = stringResource(
                         id = R.string.recipe_details_instructions_title,
@@ -233,8 +233,8 @@ fun RecipeDetailsPreview() {
                 youtubeUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
                 recipeSourceUrl = "https://www.google.com",
                 imageUrl = "some url",
-                instructions = "Some instructions to display in the preview"))
-                //ingredients = listOf(Ingredient("Chicken", "1 lb"), Ingredient("Soy sauce", "1/2 cup"))))
+                instructions = "Some instructions to display in the preview",
+                ingredients = listOf(Ingredient("Chicken", "1 lb"), Ingredient("Soy sauce", "1/2 cup"))))
     }
 }
 
