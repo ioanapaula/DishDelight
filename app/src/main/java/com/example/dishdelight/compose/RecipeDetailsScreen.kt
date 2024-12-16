@@ -22,6 +22,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -33,6 +34,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.SpanStyle
@@ -147,11 +150,34 @@ fun RecipeDetails(
                 }
             }
             Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = recipeDetails.title,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        modifier = Modifier
+                            .weight(8f)
+                            .align(Alignment.CenterVertically),
+                        text = recipeDetails.title,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                    IconButton(
+                        modifier = Modifier
+                            .weight(1f),
+                        onClick = {
+                            val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                                type = "text/plain"
+                                putExtra(
+                                    Intent.EXTRA_TEXT,
+                                    "Check out this recipe: ${recipeDetails.title} - ${recipeDetails.recipeSourceUrl}"
+                                )
+                            }
+                            launcher.launch(sendIntent)
+                        }) {
+                        Image(
+                            painter = painterResource(id = R.drawable.vector_share_icon),
+                            contentDescription = "Share button"
+                        )
+                    }
+                }
                 Text(
                     modifier = Modifier.padding(0.dp, 4.dp),
                     text = categoryString
