@@ -2,7 +2,7 @@
 
 Features
 
-•  **Network Requests**: Fetches data efficiently and reliably from the free TheMealDB API using **Retrofit**.
+•  **Network Requests**: Fetches data efficiently and reliably from the free TheMealDB API using **Retrofit** and **Gson**.
 
 •  **LiveData**: Utilizes LiveData for observing data changes.
 
