@@ -96,12 +96,12 @@ fun RecipeDetails(
             append(stringResource(id = R.string.recipe_details_source_bold))
         }
         withStyle(style = SpanStyle(fontSize = 12.sp)) { // Apply font size for domain string
-            append(extractDomain(recipeDetails.recipeSourceUrl))
+            append(extractDomain(recipeDetails.recipeSourceUrl ?: ""))
         }
     }
 
-    val showSourceButton = recipeDetails.recipeSourceUrl.isNotEmpty() && recipeDetails.recipeSourceUrl != "null"
-    val showYoutubeButton = recipeDetails.youtubeUrl.isNotEmpty() && recipeDetails.youtubeUrl != "null"
+    val showSourceButton = !recipeDetails.recipeSourceUrl.isNullOrEmpty()
+    val showYoutubeButton = !recipeDetails.youtubeUrl.isNullOrEmpty()
 
     Box(
         modifier = Modifier
@@ -189,7 +189,7 @@ fun RecipeDetails(
                     modifier = Modifier.padding(0.dp, 4.dp),
                     text = areaString
                 )
-                if (recipeDetails.tags.isNotEmpty() && recipeDetails.tags != "null") {
+                if (!recipeDetails.tags.isNullOrEmpty()) {
                     Text(
                         modifier = Modifier.padding(0.dp, 4.dp),
                         text = tagsString
