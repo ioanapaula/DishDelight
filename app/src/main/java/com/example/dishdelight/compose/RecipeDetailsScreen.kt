@@ -101,6 +101,8 @@ fun RecipeDetails(
     }
 
     val showSourceButton = recipeDetails.recipeSourceUrl.isNotEmpty() && recipeDetails.recipeSourceUrl != "null"
+    val showYoutubeButton = recipeDetails.youtubeUrl.isNotEmpty() && recipeDetails.youtubeUrl != "null"
+
     Box(
         modifier = Modifier
             .padding(innerPadding)
@@ -120,7 +122,7 @@ fun RecipeDetails(
                         .height(250.dp),
                     contentScale = ContentScale.Crop
                 )
-                if (recipeDetails.youtubeUrl.isNotEmpty() && recipeDetails.youtubeUrl != "null") {
+                if (showYoutubeButton) {
                     Button(
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
@@ -152,23 +154,31 @@ fun RecipeDetails(
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
-                    IconButton(
-                        modifier = Modifier
-                            .weight(1f),
-                        onClick = {
-                            val sendIntent = Intent(Intent.ACTION_SEND).apply {
-                                type = "text/plain"
-                                putExtra(
-                                    Intent.EXTRA_TEXT,
-                                    "Check out this recipe: ${recipeDetails.title} - ${recipeDetails.recipeSourceUrl}"
-                                )
-                            }
-                            launcher.launch(sendIntent)
-                        }) {
-                        Image(
-                            painter = painterResource(id = R.drawable.vector_share_icon),
-                            contentDescription = "Share button"
-                        )
+                    if (showYoutubeButton || showSourceButton) {
+                        IconButton(
+                            modifier = Modifier
+                                .weight(1f),
+                            onClick = {
+                                var recipeSharedContent =
+                                    if (showSourceButton) {
+                                        recipeDetails.recipeSourceUrl
+                                    } else {
+                                        recipeDetails.youtubeUrl
+                                    }
+                                val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(
+                                        Intent.EXTRA_TEXT,
+                                        "Check out this recipe: ${recipeDetails.title} - ${recipeSharedContent}"
+                                    )
+                                }
+                                launcher.launch(sendIntent)
+                            }) {
+                            Image(
+                                painter = painterResource(id = R.drawable.vector_share_icon),
+                                contentDescription = "Share button"
+                            )
+                        }
                     }
                 }
                 Text(
