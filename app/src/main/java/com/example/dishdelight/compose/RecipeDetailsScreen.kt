@@ -49,11 +49,17 @@ import com.example.explorecompose.ExpandableCard
 fun RecipeDetailsScreen(
      viewModel: RecipeDetailsViewModel
 ) {
-    val recipeDetails by viewModel.recipeDetails.observeAsState()
+    val recipeDetails = viewModel.recipeDetails.observeAsState().value
+    val hasSourceUrl = viewModel.hasSourceUrl.observeAsState(initial = false).value
+    val hasYoutubeUrl = viewModel.hasYoutubeUrl.observeAsState(initial = false).value
 
     if (recipeDetails != null){
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            RecipeDetails(innerPadding = innerPadding, recipeDetails = recipeDetails!!)
+            RecipeDetails(
+                innerPadding = innerPadding,
+                recipeDetails = recipeDetails!!,
+                hasSourceUrl = hasSourceUrl,
+                hasYoutubeUrl = hasYoutubeUrl)
         }
     }
 }
@@ -61,12 +67,15 @@ fun RecipeDetailsScreen(
 @Composable
 fun RecipeDetails(
     innerPadding: PaddingValues,
-    recipeDetails: RecipeDetails){
+    recipeDetails: RecipeDetails,
+    hasSourceUrl: Boolean = false,
+    hasYoutubeUrl: Boolean = false) {
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { /* Optional: Handle the result if needed */ }
 
+    // region Text formatting
     val categoryString = buildAnnotatedString {
         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
             append(stringResource(id = R.string.recipe_details_category_bold))
@@ -92,16 +101,19 @@ fun RecipeDetails(
     }
 
     val domainString = buildAnnotatedString {
-        withStyle(style = SpanStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)) { // Apply font sizefor source string
+        withStyle(
+            style = SpanStyle(
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        ) {
             append(stringResource(id = R.string.recipe_details_source_bold))
         }
         withStyle(style = SpanStyle(fontSize = 12.sp)) { // Apply font size for domain string
             append(extractDomain(recipeDetails.recipeSourceUrl ?: ""))
         }
     }
-
-    val showSourceButton = !recipeDetails.recipeSourceUrl.isNullOrEmpty()
-    val showYoutubeButton = !recipeDetails.youtubeUrl.isNullOrEmpty()
+    // endregion
 
     Box(
         modifier = Modifier
@@ -110,7 +122,7 @@ fun RecipeDetails(
     ) {
         Column(
             modifier = Modifier
-                .padding(bottom = if (showSourceButton) 85.dp else 10.dp)
+                .padding(bottom = if (hasSourceUrl) 85.dp else 10.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Box(modifier = Modifier) {
@@ -122,7 +134,7 @@ fun RecipeDetails(
                         .height(250.dp),
                     contentScale = ContentScale.Crop
                 )
-                if (showYoutubeButton) {
+                if (hasYoutubeUrl) {
                     Button(
                         modifier = Modifier
                             .align(Alignment.BottomEnd)
@@ -154,13 +166,13 @@ fun RecipeDetails(
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold
                     )
-                    if (showYoutubeButton || showSourceButton) {
+                    if (hasYoutubeUrl || hasSourceUrl) {
                         IconButton(
                             modifier = Modifier
                                 .weight(1f),
                             onClick = {
                                 var recipeSharedContent =
-                                    if (showSourceButton) {
+                                    if (hasSourceUrl) {
                                         recipeDetails.recipeSourceUrl
                                     } else {
                                         recipeDetails.youtubeUrl
@@ -196,24 +208,23 @@ fun RecipeDetails(
                     )
                 }
                 Text(
-                    modifier = Modifier.padding(0.dp, 8.dp),
+                    modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
                     text = stringResource(id = R.string.recipe_details_ingredients_title),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-                Column {
-                    recipeDetails.ingredients.chunked(2).forEach{
-                        rowItems ->
-                            Row(modifier = Modifier.fillMaxWidth()) {
-                                rowItems.forEach { ingredient ->
-                                    Text(
-                                        modifier = Modifier
-                                            .padding(0.dp, 4.dp)
-                                            .weight(1f),
-                                        text = "${ingredient.measure} ${ingredient.name}"
-                                    )
-                                }
+                Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                    recipeDetails.ingredients.chunked(2).forEach { rowItems ->
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            rowItems.forEach { ingredient ->
+                                Text(
+                                    modifier = Modifier
+                                        .padding(0.dp, 4.dp)
+                                        .weight(1f),
+                                    text = "${ingredient.measure} ${ingredient.name}"
+                                )
                             }
+                        }
                     }
                 }
                 ExpandableCard(
@@ -227,7 +238,7 @@ fun RecipeDetails(
                 )
             }
         }
-        if (showSourceButton){
+        if (hasSourceUrl) {
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -253,6 +264,8 @@ fun RecipeDetailsPreview() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         RecipeDetails(
             innerPadding = innerPadding,
+            hasSourceUrl = true,
+            hasYoutubeUrl = true,
             recipeDetails = RecipeDetails(
                 title = "Chicken Teriyaki Casserole",
                 category = "Chicken",
