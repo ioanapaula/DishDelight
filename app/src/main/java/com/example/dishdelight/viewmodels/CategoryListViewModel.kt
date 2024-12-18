@@ -19,7 +19,7 @@ class CategoryListViewModel(application: Application) : AndroidViewModel(applica
         fetchCategories()
     }
 
-    private fun fetchCategories() {
+    fun fetchCategories() {
         viewModelScope.launch {
             try {
                 val categories = repository.getCategories()

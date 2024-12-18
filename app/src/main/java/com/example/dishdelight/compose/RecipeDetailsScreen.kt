@@ -128,6 +128,8 @@ fun RecipeDetails(
             Box(modifier = Modifier) {
                 AsyncImage(
                     model = recipeDetails.imageUrl,
+                    placeholder = painterResource(id = R.drawable.ic_file_placeholder),
+                    error = painterResource(id = R.drawable.ic_error),
                     contentDescription = "Recipe Image",
                     modifier = Modifier
                         .fillMaxWidth()
