@@ -1,17 +1,8 @@
-
+package com.example.dishdelight.network
 import android.util.Log
-import com.example.dishdelight.data.ApiClient
-import com.example.dishdelight.data.CategoriesResponse
 import com.example.dishdelight.data.Category
-import com.example.dishdelight.data.Ingredient
-import com.example.dishdelight.data.NetworkUtils
 import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.data.RecipeDetails
-import com.example.dishdelight.data.RecipeDetailsResponse
-import com.example.dishdelight.data.RetrofitClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.json.JSONObject
 
 class RecipeRepository {
     private val recipesDetailsById = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="

@@ -1,4 +1,4 @@
-package com.example.dishdelight.ui.ViewHolders
+package com.example.dishdelight.ui.viewholders
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load

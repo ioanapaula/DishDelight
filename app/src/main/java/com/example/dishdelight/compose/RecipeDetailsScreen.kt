@@ -42,7 +42,7 @@ import coil.compose.AsyncImage
 import com.example.dishdelight.R
 import com.example.dishdelight.data.Ingredient
 import com.example.dishdelight.data.RecipeDetails
-import com.example.dishdelight.data.RecipeDetailsViewModel
+import com.example.dishdelight.viewmodels.RecipeDetailsViewModel
 import com.example.explorecompose.ExpandableCard
 
 @Composable

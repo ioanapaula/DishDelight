@@ -1,12 +1,13 @@
-package com.example.dishdelight.data
+package com.example.dishdelight.viewmodels
 
-import RecipeRepository
+import com.example.dishdelight.network.RecipeRepository
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.dishdelight.data.RecipeDetails
 import kotlinx.coroutines.launch
 
 class RecipeDetailsViewModel(application: Application) : AndroidViewModel(application)  {

@@ -1,4 +1,4 @@
-package com.example.dishdelight.ui.Fragments
+package com.example.dishdelight.ui.fragments
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dishdelight.R
-import com.example.dishdelight.data.CategoryListViewModel
+import com.example.dishdelight.viewmodels.CategoryListViewModel
 import com.example.dishdelight.databinding.FragmentCategoryListBinding
-import com.example.dishdelight.ui.Adapters.CategoryAdapter
+import com.example.dishdelight.ui.adapters.CategoryAdapter
 
 class CategoryListFragment : Fragment() {
     private lateinit var viewModel: CategoryListViewModel

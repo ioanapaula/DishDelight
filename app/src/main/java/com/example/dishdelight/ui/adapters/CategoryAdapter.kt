@@ -1,4 +1,4 @@
-package com.example.dishdelight.ui.Adapters
+package com.example.dishdelight.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.dishdelight.data.Category
 import com.example.dishdelight.databinding.CellCategoryItemBinding
-import com.example.dishdelight.ui.ViewHolders.CategoryViewHolder
+import com.example.dishdelight.ui.viewholders.CategoryViewHolder
 
 class CategoryAdapter(
     private val onCategoryClick: (Category) -> Unit)
