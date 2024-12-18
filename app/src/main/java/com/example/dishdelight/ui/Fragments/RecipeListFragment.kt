@@ -1,4 +1,4 @@
-package com.example.dishdelight.ui.Fragments
+package com.example.dishdelight.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dishdelight.R
-import com.example.dishdelight.data.RecipeListViewModel
+import com.example.dishdelight.viewmodels.RecipeListViewModel
 import com.example.dishdelight.databinding.FragmentRecipeListBinding
-import com.example.dishdelight.ui.Adapters.RecipeAdapter
+import com.example.dishdelight.ui.adapters.RecipeAdapter
 
 class RecipeListFragment : Fragment() {
     private lateinit var viewModel: RecipeListViewModel

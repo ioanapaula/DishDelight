@@ -1,12 +1,10 @@
-package com.example.dishdelight.ui.Adapters
+package com.example.dishdelight.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dishdelight.data.Ingredient
-import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.databinding.CellIngredientItemBinding
 
 class IngredientAdapter(private val ingredients: List<Ingredient>) :
