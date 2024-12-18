@@ -8,7 +8,7 @@
             type="com.example.dishdelight.data.RecipeDetails" />
         <variable
             name="recipeDetailsViewModel"
-            type="com.example.dishdelight.data.RecipeDetailsViewModel" />
+            type="com.example.dishdelight.viewmodels.RecipeDetailsViewModel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"

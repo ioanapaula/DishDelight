@@ -1,5 +1,7 @@
-package com.example.dishdelight.data
+package com.example.dishdelight.network
 
+import com.example.dishdelight.data.RecipeDetails
+import com.example.dishdelight.data.RecipeDetailsDeserializer
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

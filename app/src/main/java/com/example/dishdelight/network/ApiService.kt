@@ -1,5 +1,8 @@
-package com.example.dishdelight.data
+package com.example.dishdelight.network
 
+import com.example.dishdelight.data.CategoriesResponse
+import com.example.dishdelight.data.RecipeDetailsResponse
+import com.example.dishdelight.data.RecipesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
