@@ -8,11 +8,11 @@ Features
 
 •  **MVVM Architecture**: Implements the Model-View-ViewModel architecture for a clean and maintainable codebase.
 
-•  **RecyclerViews**: Displays lists of items using RecyclerViews.
-
 •  **Navigation**: Handles navigation between different fragments.
 
 •  **Image Loading**: Uses the **Coil** library to load and display images efficiently.
+
+•  ~~**RecyclerViews**: Displays lists of items using RecyclerViews.~~
 
 Migration to **Jetpack Compose**
 This project is currently being migrated to Jetpack Compose to leverage its modern UI toolkit and improve the development experience. The migration process is ongoing, with the following steps:
