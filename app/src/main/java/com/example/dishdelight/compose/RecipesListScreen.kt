@@ -59,7 +59,7 @@ fun RecipeItem(recipe: Recipe, navController: NavController){
         }
     ){
         AsyncImage(
-            model = recipe.imageUrl,
+            model = recipe.imageUrl+ "/preview",
             placeholder = painterResource(id = R.drawable.ic_file_placeholder),
             error = painterResource(id = R.drawable.ic_error),
             contentDescription = recipe.title,
@@ -95,9 +95,8 @@ fun RecipesList(
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier
-                .fillMaxSize()
-                .padding(12.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                .fillMaxSize(),
+            contentPadding = PaddingValues(vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(recipes) { recipe ->
