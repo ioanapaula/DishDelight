@@ -6,8 +6,7 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="com.example.dishdelight.ui.fragments.CategoryListFragment"
-        android:label="@string/categories_list_title"
-        tools:layout="@layout/fragment_category_list" >
+        android:label="@string/categories_list_title" >
         <action
             android:id="@+id/action_categoryListFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" >
@@ -21,8 +20,7 @@
     <fragment
         android:id="@+id/recipeListFragment"
         android:name="com.example.dishdelight.ui.fragments.RecipeListFragment"
-        android:label="@string/recipe_list_title"
-        tools:layout="@layout/fragment_recipe_list">
+        android:label="@string/recipe_list_title">
         <argument
             android:name="categoryName"
             app:argType="string" />
@@ -39,8 +37,7 @@
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="com.example.dishdelight.ui.fragments.RecipeDetailsFragment"
-        android:label="@string/recipe_details_title"
-        tools:layout="@layout/fragment_recipe_details">
+        android:label="@string/recipe_details_title">
         <argument
             android:name="recipeId"
             app:argType="string" />

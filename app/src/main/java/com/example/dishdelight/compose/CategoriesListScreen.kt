@@ -103,11 +103,11 @@ fun CategoriesList(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(12.dp), // Add padding similar to your item decoration
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Add spacing between items
+                .padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(categories) { category ->
-                CategoryItem(category, navController) // Display each category item
+                CategoryItem(category, navController)
             }
         }
     }
