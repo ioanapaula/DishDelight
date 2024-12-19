@@ -17,16 +17,18 @@ Features
 Migration to **Jetpack Compose**
 This project is currently being migrated to Jetpack Compose to leverage its modern UI toolkit and improve the development experience. The migration process is ongoing, with the following steps:
 
-1. Initial Migration: One screen has been successfully migrated to Jetpack Compose.
+1. Initial Migration: All screens been successfully migrated to Jetpack Compose.
 2. Future Plans:
    - All new screens will be developed using Jetpack Compose.
-   - All existing screens will be migrated to Jetpack Compose
+   - All existing screens will be fully migrated to Jetpack Compose (right now they are still part of fragments)
 
 
 Progress and Goals
-•  Completed: Migration of the RecipeDetails screen.
+•  Completed: 
+- Migration of the RecipeDetails screen.
+- Migration of the CategoriesList screen.
+- Migration of the RecipesList screen.
 
-•  In progreess: Full transition to Jetpack Compose for all new features.
-
-•  Upcoming: Gradual migration of existing screens and components.
-
+•  In progress: 
+- Full transition to Jetpack Compose for all new features.
+- Replace Fragments and the Navigation component
