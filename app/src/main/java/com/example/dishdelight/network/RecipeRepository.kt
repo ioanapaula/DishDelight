@@ -1,18 +1,27 @@
 package com.example.dishdelight.network
 import android.util.Log
 import com.example.dishdelight.data.Category
+import com.example.dishdelight.data.CategoryName
 import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.data.RecipeDetails
 
 class RecipeRepository {
-    private val recipesDetailsById = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
-
     suspend fun getCategories(): List<Category>{
         return try {
             val response = ApiClient.apiService.getCategories()
             response.categories
         } catch (e: Exception) {
             Log.e("Repository", "Error fetching categories: ${e.message}", e)
+            emptyList()
+        }
+    }
+
+    suspend fun getCategoryNames(): List<CategoryName>{
+        return try {
+            val response = ApiClient.apiService.getCategoryNames()
+            response.meals
+        } catch (e: Exception) {
+            Log.e("Repository", "Error fetching category names: ${e.message}", e)
             emptyList()
         }
     }
@@ -33,6 +42,17 @@ class RecipeRepository {
             response.meals.first()
         } catch (e: Exception) {
             Log.e("Repository", "Error fetching recipe details: ${e.message}", e)
+            // temporary handling of error scenario
+            RecipeDetails("", "", "", "", "", "", "", "", "", emptyList())
+        }
+    }
+
+    suspend fun getRandomRecipe(): RecipeDetails {
+        return try {
+            val response = ApiClient.apiService.getRandomRecipe()
+            response.meals.first()
+        } catch (e: Exception) {
+            Log.e("Repository", "Error fetching random recipe details: ${e.message}", e)
             // temporary handling of error scenario
             RecipeDetails("", "", "", "", "", "", "", "", "", emptyList())
         }
