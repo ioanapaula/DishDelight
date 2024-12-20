@@ -57,12 +57,9 @@ fun CategoriesListScreen(
 }
 
 @Composable
-fun CategoryItem(category: Category, navController: NavController) {
+fun CategoryItem(category: Category, onClick: () -> Unit) {
     ElevatedCard(
-        onClick = {
-            val action = CategoryListFragmentDirections.actionCategoryListFragmentToRecipeListFragment(category.title)
-            navController.navigate(action)
-        },
+        onClick = onClick,
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
         ),
@@ -106,22 +103,20 @@ fun CategoriesList(
     navController: NavController,
     categories: List<Category>
     ) {
-    Box(
-        modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize()
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(vertical = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(categories) { category ->
-                CategoryItem(category, navController)
-            }
+        items(categories) { category ->
+            CategoryItem(category, onClick = {
+                val action = CategoryListFragmentDirections.actionCategoryListFragmentToRecipeListFragment(category.title)
+                navController.navigate(action)
+            })
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
