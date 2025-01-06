@@ -1,5 +1,6 @@
 package com.example.dishdelight.network
 
+import com.example.dishdelight.data.AreasResponse
 import com.example.dishdelight.data.CategoriesResponse
 import com.example.dishdelight.data.CategoryNamesResponse
 import com.example.dishdelight.data.RecipeDetailsResponse
@@ -14,8 +15,14 @@ interface ApiService {
     @GET("list.php")
     suspend fun getCategoryNames(@Query("c") list: String = "list"): CategoryNamesResponse
 
+    @GET("list.php")
+    suspend fun getAreaNames(@Query("a") list: String = "list"): AreasResponse
+
     @GET("filter.php")
-    suspend fun getRecipesByCategory(@Query("c") category: String): RecipesResponse
+    suspend fun getRecipes(
+        @Query("c") category: String? = null,
+        @Query("a") area: String? = null
+    ): RecipesResponse
 
     @GET("lookup.php")
     suspend fun getRecipesDetails(@Query("i") id: String): RecipeDetailsResponse

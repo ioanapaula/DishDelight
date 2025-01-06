@@ -1,5 +1,6 @@
 package com.example.dishdelight.network
 import android.util.Log
+import com.example.dishdelight.data.AreaName
 import com.example.dishdelight.data.Category
 import com.example.dishdelight.data.CategoryName
 import com.example.dishdelight.data.Recipe
@@ -25,10 +26,19 @@ class RecipeRepository {
             emptyList()
         }
     }
-
-    suspend fun getRecipes(recipeCategory: String): List<Recipe> {
+    suspend fun getAreaNames(): List<AreaName>{
         return try {
-            val response = ApiClient.apiService.getRecipesByCategory(recipeCategory)
+            val response = ApiClient.apiService.getAreaNames()
+            response.meals
+        } catch (e: Exception) {
+            Log.e("Repository", "Error fetching category names: ${e.message}", e)
+            emptyList()
+        }
+    }
+
+    suspend fun getRecipes(recipeCategory: String?, recipeArea: String?): List<Recipe> {
+        return try {
+            val response = ApiClient.apiService.getRecipes(category = recipeCategory, area = recipeArea)
             response.meals
         } catch (e: Exception) {
             Log.e("Repository", "Error fetching recipes by category: ${e.message}", e)

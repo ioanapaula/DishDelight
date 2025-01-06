@@ -110,7 +110,7 @@ fun CategoriesList(
     ) {
         items(categories) { category ->
             CategoryItem(category, onClick = {
-                val action = CategoryListFragmentDirections.actionCategoryListFragmentToRecipeListFragment(category.title)
+                val action = CategoryListFragmentDirections.actionCategoryListFragmentToRecipeListFragment(category.title?: "")
                 navController.navigate(action)
             })
         }
