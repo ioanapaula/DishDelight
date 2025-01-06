@@ -16,14 +16,10 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
     val recipes: LiveData<List<Recipe>> = _recipes
 
-//    init {
-//        fetchRecipes()
-//    }
-
-    fun fetchRecipes(category: String) {
+    fun fetchRecipes(category: String? = null, area: String? = null) {
         viewModelScope.launch {
             try {
-                val recipes = repository.getRecipes(category)
+                val recipes = repository.getRecipes(recipeCategory = category, recipeArea = area)
                 _recipes.value = recipes
             } catch (e: Exception) {
                 Log.e("RecipeListTag", e.message, e)

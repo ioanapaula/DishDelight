@@ -20,7 +20,11 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(this)[HomeScreenViewModel::class.java]
-        viewModel.run { fetchRandomRecipe() }
+        viewModel.run {
+            fetchRandomRecipe()
+            fetchCategoryList()
+            fetchAreaList()
+        }
 
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)

@@ -21,10 +21,18 @@ class RecipeListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val args: RecipeListFragmentArgs by navArgs()
-        val categoryName = args.categoryName
+        val filterValue = args.filterValue
+        val filterType = args.filterType
 
         viewModel = ViewModelProvider(this)[RecipeListViewModel::class.java]
-        viewModel.run { fetchRecipes(categoryName) }
+        viewModel.run {
+            if (filterType == "category") {
+                fetchRecipes(category = filterValue)
+            }
+            else{
+                fetchRecipes(area = filterValue)
+            }
+        }
 
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
