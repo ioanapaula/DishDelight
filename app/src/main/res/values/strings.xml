@@ -20,4 +20,6 @@
     <string name="view_all">View all</string>
     <string name="view_less">View less</string>
     <string name="areas_list_title">Areas</string>
+    <string name="home_header_title">Feeling lucky?</string>
+    <string name="home_header_message">Try out this random recipe and spice up your repertoire</string>
 </resources>

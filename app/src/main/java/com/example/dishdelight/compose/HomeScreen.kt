@@ -55,6 +55,17 @@ fun HomeScreen(
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
+            Text(
+                modifier = Modifier.padding(top = 32.dp, bottom = 8.dp, start = 16.dp),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                text = stringResource(R.string.home_header_title)
+            )
+            Text(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                style = MaterialTheme.typography.bodyLarge,
+                text = stringResource(R.string.home_header_message)
+            )
             HomeRandomRecipe(recipeDetails!!, recipeDetailsClicked = {
                 val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToRecipeDetailsFragment(recipeDetails.id)
                 navController.navigate(action)
@@ -77,7 +88,7 @@ fun HomeScreen(
                 title = stringResource(id = R.string.areas_list_title),
                 allFiltersButtonTitle = stringResource(id = R.string.view_all),
                 filters = areaNames,
-                filterCount = 5,
+                filterCount = areasCount,
                 filterClicked = { filterValue ->
                     val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToRecipeListFragment(filterType = "area", filterValue)
                     navController.navigate(action)
@@ -121,17 +132,6 @@ fun HomeRandomRecipe(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                text = "Feeling lucky?"
-            )
-            Text(
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = MaterialTheme.typography.bodyMedium,
-                text = "Try out this random recipe and spice up your repertoire"
-            )
             AsyncImage(
                 model = recipeDetails.imageUrl,
                 placeholder = painterResource(id = R.drawable.ic_file_placeholder),

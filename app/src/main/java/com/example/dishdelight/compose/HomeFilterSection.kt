@@ -45,7 +45,7 @@ fun HomeFilterSection(
 ) {
     var expandedState by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.padding(padding.dp)) {
+    Column(modifier = Modifier.padding(horizontal = padding.dp, vertical = 4.dp)) {
         Row(
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
         ) {
@@ -62,13 +62,13 @@ fun HomeFilterSection(
                     }
                 },
                 modifier = Modifier
-                    .weight(2f)
+                    .weight(3f)
                     .padding(0.dp)
             ) {
                 Text(
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
-                    text = if (expandedState) stringResource(id = R.string.view_all) else allFiltersButtonTitle
+                    text = if (expandedState) stringResource(id = R.string.view_less) else allFiltersButtonTitle
                 )
             }
         }
@@ -81,7 +81,7 @@ fun HomeFilterSection(
                     SuggestionChip(
                         onClick = { filterClicked(filter) },
                         label = { Text(filter) },
-                        modifier = Modifier.padding(filtersPadding.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
                 }
             }
