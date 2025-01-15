@@ -5,8 +5,10 @@ import com.example.dishdelight.data.Category
 import com.example.dishdelight.data.CategoryName
 import com.example.dishdelight.data.Recipe
 import com.example.dishdelight.data.RecipeDetails
+import com.example.dishdelight.room.FavouriteRecipe
+import com.example.dishdelight.room.FavouriteRecipeDao
 
-class RecipeRepository {
+class RecipeRepository() {
     suspend fun getCategories(): List<Category>{
         return try {
             val response = ApiClient.apiService.getCategories()

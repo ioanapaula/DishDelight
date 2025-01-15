@@ -59,7 +59,8 @@ fun RecipeDetailsScreen(
                 innerPadding = innerPadding,
                 recipeDetails = recipeDetails!!,
                 hasSourceUrl = hasSourceUrl,
-                hasYoutubeUrl = hasYoutubeUrl)
+                hasYoutubeUrl = hasYoutubeUrl,
+                viewModel = viewModel)
         }
     }
 }
@@ -69,7 +70,8 @@ fun RecipeDetails(
     innerPadding: PaddingValues,
     recipeDetails: RecipeDetails,
     hasSourceUrl: Boolean = false,
-    hasYoutubeUrl: Boolean = false) {
+    hasYoutubeUrl: Boolean = false,
+    viewModel: RecipeDetailsViewModel? = null) {
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -238,6 +240,18 @@ fun RecipeDetails(
                     text = recipeDetails.instructions,
                     cardPadding = 0.dp
                 )
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp, 24.dp, 8.dp, 16.dp),
+                    onClick = {
+                        viewModel?.addToFavourites(recipeDetails!!) // Assuming recipeDetails is not null
+                    }) {
+                    Text(
+                        textAlign = TextAlign.Center,
+                        text = "Add to favourites"
+                    )
+                }
             }
         }
         if (hasSourceUrl) {

@@ -28,6 +28,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -63,6 +66,9 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("io.coil-kt:coil:2.7.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("androidx.room:room-runtime:2.6.1") // Replace with the latest version
+    implementation("androidx.room:room-ktx:2.6.1") // Kotlin extensions for Room
+    kapt("androidx.room:room-compiler:2.6.1") // Annotation processor for Room
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
