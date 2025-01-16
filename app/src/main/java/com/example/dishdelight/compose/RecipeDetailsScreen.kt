@@ -22,7 +22,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,6 +51,7 @@ fun RecipeDetailsScreen(
     val recipeDetails = viewModel.recipeDetails.observeAsState().value
     val hasSourceUrl = viewModel.hasSourceUrl.observeAsState(initial = false).value
     val hasYoutubeUrl = viewModel.hasYoutubeUrl.observeAsState(initial = false).value
+    val isSavedToFavourites = viewModel.isSavedToFavourites.observeAsState(initial = false).value
 
     if (recipeDetails != null){
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -60,6 +60,7 @@ fun RecipeDetailsScreen(
                 recipeDetails = recipeDetails!!,
                 hasSourceUrl = hasSourceUrl,
                 hasYoutubeUrl = hasYoutubeUrl,
+                isSavedToFavourites = isSavedToFavourites,
                 viewModel = viewModel)
         }
     }
@@ -71,7 +72,9 @@ fun RecipeDetails(
     recipeDetails: RecipeDetails,
     hasSourceUrl: Boolean = false,
     hasYoutubeUrl: Boolean = false,
-    viewModel: RecipeDetailsViewModel? = null) {
+    viewModel: RecipeDetailsViewModel? = null,
+    isSavedToFavourites: Boolean
+) {
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -245,11 +248,15 @@ fun RecipeDetails(
                         .fillMaxWidth()
                         .padding(8.dp, 24.dp, 8.dp, 16.dp),
                     onClick = {
-                        viewModel?.addToFavourites(recipeDetails!!) // Assuming recipeDetails is not null
+                        viewModel?.addToFavourites(recipeDetails!!)
                     }) {
                     Text(
                         textAlign = TextAlign.Center,
-                        text = "Add to favourites"
+                        text = if (isSavedToFavourites) {
+                            stringResource(id = R.string.recipe_details_saved_to_favourites)
+                        } else {
+                            stringResource(id = R.string.recipe_details_not_saved_to_favourites)
+                        }
                     )
                 }
             }
@@ -280,8 +287,6 @@ fun RecipeDetailsPreview() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         RecipeDetails(
             innerPadding = innerPadding,
-            hasSourceUrl = true,
-            hasYoutubeUrl = true,
             recipeDetails = RecipeDetails(
                 title = "Chicken Teriyaki Casserole",
                 category = "Chicken",
@@ -292,7 +297,11 @@ fun RecipeDetailsPreview() {
                 recipeSourceUrl = "",
                 imageUrl = "some url",
                 instructions = "Some instructions to display in the previewSome instructions to display in the previewSome instructions to display in the previewSome instructions to display in the previewSome instructions to display in the previewSome instructions to display in the previewSome instructions to display in the preview",
-                ingredients = listOf(Ingredient("Chicken", "1 lb"), Ingredient("Soy sauce", "1/2 cup"))))
+                ingredients = listOf(Ingredient("Chicken", "1 lb"), Ingredient("Soy sauce", "1/2 cup"))),
+            hasSourceUrl = true,
+            hasYoutubeUrl = true,
+            isSavedToFavourites = true
+        )
     }
 }
 
