@@ -102,10 +102,7 @@ fun RecipesList(
     ) {
         items(recipes) { recipe ->
             RecipeItem(recipe, onClick = {
-                val action =
-                    RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(
-                        recipe.id
-                    )
+                val action = RecipeListFragmentDirections.actionRecipeListFragmentToRecipeDetailsFragment(recipe.id)
                 navController.navigate(action)
             })
         }

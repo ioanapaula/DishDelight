@@ -1,4 +1,4 @@
-package com.example.dishdelight.ui.fragments
+package com.example.dishdelight.ui.fragments;
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,32 +6,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.example.dishdelight.viewmodels.FavouriteRecipesListViewModel
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
-import com.example.dishdelight.compose.RecipeDetailsScreen
-import com.example.dishdelight.viewmodels.RecipeDetailsViewModel
+import androidx.navigation.findNavController
+import com.example.dishdelight.compose.FavouriteRecipesListScreen
 
-class RecipeDetailsFragment: Fragment() {
-    private lateinit var viewModel: RecipeDetailsViewModel
+class FavouriteRecipesListFragment : Fragment() {
+    private lateinit var viewModel: FavouriteRecipesListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val args: RecipeDetailsFragmentArgs by navArgs()
-        val recipeId = args.recipeId
 
-        viewModel = ViewModelProvider(this)[RecipeDetailsViewModel::class.java]
+        viewModel = ViewModelProvider(this)[FavouriteRecipesListViewModel::class.java]
         viewModel.run {
-            fetchRecipeDetails(recipeId)
-            isSavedToFavourites(recipeId.toInt())
+            fetchFavouriteRecipes()
         }
 
         return ComposeView(requireContext()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                RecipeDetailsScreen(viewModel)
+                val navController = findNavController()
+                FavouriteRecipesListScreen(viewModel, navController)
             }
         }
     }

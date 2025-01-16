@@ -19,20 +19,33 @@
             android:id="@+id/action_homeScreenFragment_to_recipeListFragment"
             app:destination="@id/recipeListFragment" >
         </action>
+        <action
+            android:id="@+id/action_homeScreenFragment_to_favouriteRecipeListFragment"
+            app:destination="@id/favouriteRecipesListFragment" >
+        </action>
     </fragment>
     <fragment
-    android:id="@+id/categoryListFragment"
-    android:name="com.example.dishdelight.ui.fragments.CategoryListFragment"
-    android:label="@string/categories_list_title" >
-    <action
-        android:id="@+id/action_categoryListFragment_to_recipeListFragment"
-        app:destination="@id/recipeListFragment" >
-        <argument
-            android:name="filterValue"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </action>
+        android:id="@+id/favouriteRecipesListFragment"
+        android:name="com.example.dishdelight.ui.fragments.FavouriteRecipesListFragment"
+        android:label="Your Cookbook">
+        <action
+            android:id="@+id/action_favouriteRecipesFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" >
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="com.example.dishdelight.ui.fragments.CategoryListFragment"
+        android:label="@string/categories_list_title" >
+        <action
+            android:id="@+id/action_categoryListFragment_to_recipeListFragment"
+            app:destination="@id/recipeListFragment" >
+            <argument
+                android:name="filterValue"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/recipeListFragment"

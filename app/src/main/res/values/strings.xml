@@ -22,4 +22,6 @@
     <string name="areas_list_title">Areas</string>
     <string name="home_header_title">Feeling lucky?</string>
     <string name="home_header_message">Try out this random recipe and spice up your repertoire</string>
+    <string name="recipe_details_saved_to_favourites">Saved in cook book!</string>
+    <string name="recipe_details_not_saved_to_favourites">Save in cook book</string>
 </resources>

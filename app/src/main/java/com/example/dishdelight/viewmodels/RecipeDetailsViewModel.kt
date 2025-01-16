@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.dishdelight.data.RecipeDetails
 import com.example.dishdelight.room.AppDatabase
 import com.example.dishdelight.room.FavouriteRecipe
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecipeDetailsViewModel(application: Application) : AndroidViewModel(application)  {
@@ -20,13 +21,15 @@ class RecipeDetailsViewModel(application: Application) : AndroidViewModel(applic
     private val _recipeDetails = MutableLiveData<RecipeDetails>()
     private val _hasSourceUrl = MutableLiveData<Boolean>()
     private val _hasYoutubeUrl = MutableLiveData<Boolean>()
+    private val _isSavedToFavourites = MutableLiveData<Boolean>()
 
     val recipeDetails: LiveData<RecipeDetails> = _recipeDetails
     val hasSourceUrl: LiveData<Boolean> = _hasSourceUrl
     val hasYoutubeUrl: LiveData<Boolean> = _hasYoutubeUrl
+    val isSavedToFavourites: LiveData<Boolean> = _isSavedToFavourites
 
     fun addToFavourites(recipeDetails: RecipeDetails) {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             val favouriteRecipe = FavouriteRecipe(
                 recipeId = recipeDetails.id.toIntOrNull() ?: 0,
                 recipeTitle = recipeDetails.title,
@@ -34,9 +37,16 @@ class RecipeDetailsViewModel(application: Application) : AndroidViewModel(applic
                 recipeArea = recipeDetails.area,
                 recipeTags = recipeDetails.tags ?: "",
                 recipeNotes = "",
-                recipeImageUrl = recipeDetails.imageUrl
+                recipeImageUrl = recipeDetails.imageUrl + "/preview"
             )
             favouriteRecipeDao.insert(favouriteRecipe)
+        }
+    }
+
+    fun isSavedToFavourites(recipeId: Int) {
+        viewModelScope.launch(Dispatchers.IO){
+            val isSaved = favouriteRecipeDao.isRecipeInFavourites(recipeId)
+            _isSavedToFavourites.postValue(isSaved)
         }
     }
 
