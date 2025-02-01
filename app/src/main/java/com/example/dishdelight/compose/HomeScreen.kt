@@ -70,18 +70,6 @@ fun HomeScreen(
                 val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToRecipeDetailsFragment(recipeDetails.id)
                 navController.navigate(action)
             })
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp, 24.dp, 8.dp, 16.dp),
-                onClick = {
-                    val action = HomeScreenFragmentDirections.actionHomeScreenFragmentToFavouriteRecipeListFragment()
-                    navController.navigate(action)
-                }) {
-                Text(
-                    textAlign = TextAlign.Center,
-                    text = "Your cookbook")
-            }
             HomeFilterSection(
                 title = stringResource(id = R.string.categories_list_title),
                 allFiltersButtonTitle = stringResource(id = R.string.view_all),

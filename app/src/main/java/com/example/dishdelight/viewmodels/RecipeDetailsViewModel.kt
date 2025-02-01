@@ -44,9 +44,9 @@ class RecipeDetailsViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun isSavedToFavourites(recipeId: Int) {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch{
             val isSaved = favouriteRecipeDao.isRecipeInFavourites(recipeId)
-            _isSavedToFavourites.postValue(isSaved)
+            _isSavedToFavourites.value = isSaved
         }
     }
 

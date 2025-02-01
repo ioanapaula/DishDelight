@@ -19,9 +19,9 @@ class FavouriteRecipesListViewModel(application: Application) : AndroidViewModel
     val recipes: LiveData<List<FavouriteRecipe>> = _recipes
 
     fun fetchFavouriteRecipes(){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             val recipes = favouriteRecipeDao.getAllRecipes()
-            _recipes.postValue(recipes)
+            _recipes.value = recipes
         }
     }
 }

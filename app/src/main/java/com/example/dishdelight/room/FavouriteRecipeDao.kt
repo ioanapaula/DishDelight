@@ -15,17 +15,17 @@ interface FavouriteRecipeDao {
     suspend fun insert(recipe: FavouriteRecipe)
 
     @Update
-    fun update(recipe: FavouriteRecipe)
+    suspend fun update(recipe: FavouriteRecipe)
 
     @Delete
-    fun delete(recipe: FavouriteRecipe)
+    suspend fun delete(recipe: FavouriteRecipe)
 
     @Query("SELECT * FROM $RECIPE_TABLE_NAME")
-    fun getAllRecipes(): MutableList<FavouriteRecipe>
+    suspend fun getAllRecipes(): MutableList<FavouriteRecipe>
 
     @Query("SELECT * FROM $RECIPE_TABLE_NAME WHERE recipeId LIKE :id")
-    fun getRecipeById(id: Int): FavouriteRecipe
+    suspend fun getRecipeById(id: Int): FavouriteRecipe
 
     @Query("SELECT EXISTS(SELECT 1 FROM $RECIPE_TABLE_NAME WHERE recipeId = :id)")
-    fun isRecipeInFavourites(id: Int): Boolean
+    suspend fun isRecipeInFavourites(id: Int): Boolean
 }

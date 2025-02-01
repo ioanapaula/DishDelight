@@ -24,4 +24,6 @@
     <string name="home_header_message">Try out this random recipe and spice up your repertoire</string>
     <string name="recipe_details_saved_to_favourites">Saved in cook book!</string>
     <string name="recipe_details_not_saved_to_favourites">Save in cook book</string>
+    <string name="cookbook_menu_title">Your cookbook</string>
+    <string name="home_menu_title">Home</string>
 </resources>
