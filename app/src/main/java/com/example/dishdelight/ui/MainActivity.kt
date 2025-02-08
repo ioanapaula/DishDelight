@@ -18,15 +18,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up the ActionBar with the NavController
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment, R.id.favouriteRecipesListFragment) // Top-level destinations
+            setOf(R.id.homeFragment, R.id.favouriteRecipesListFragment)
         )
-        setupActionBarWithNavController(navController, appBarConfiguration) // Connect ActionBar
+        setupActionBarWithNavController(navController, appBarConfiguration)
         NavigationUI.setupWithNavController(
             bottomNavigationView,
             navController
