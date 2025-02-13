@@ -22,7 +22,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -78,7 +82,10 @@ fun RecipeDetails(
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
-    ) { /* Optional: Handle the result if needed */ }
+    ) { }
+
+    var isSavedToCookbook by remember { mutableStateOf(false) }
+    isSavedToCookbook = isSavedToFavourites
 
     // region Text formatting
     val categoryString = buildAnnotatedString {
@@ -114,7 +121,7 @@ fun RecipeDetails(
         ) {
             append(stringResource(id = R.string.recipe_details_source_bold))
         }
-        withStyle(style = SpanStyle(fontSize = 12.sp)) { // Apply font size for domain string
+        withStyle(style = SpanStyle(fontSize = 12.sp)) { 
             append(extractDomain(recipeDetails.recipeSourceUrl ?: ""))
         }
     }
@@ -249,10 +256,11 @@ fun RecipeDetails(
                         .padding(8.dp, 24.dp, 8.dp, 16.dp),
                     onClick = {
                         viewModel?.addToFavourites(recipeDetails!!)
+                        isSavedToCookbook = true;
                     }) {
                     Text(
                         textAlign = TextAlign.Center,
-                        text = if (isSavedToFavourites) {
+                        text = if (isSavedToCookbook) {
                             stringResource(id = R.string.recipe_details_saved_to_favourites)
                         } else {
                             stringResource(id = R.string.recipe_details_not_saved_to_favourites)
