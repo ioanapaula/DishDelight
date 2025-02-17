@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.dishdelight.data.RecipeDetails
 import com.example.dishdelight.room.AppDatabase
 import com.example.dishdelight.room.FavouriteRecipe
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,13 @@ class FavouriteRecipesListViewModel(application: Application) : AndroidViewModel
         viewModelScope.launch {
             val recipes = favouriteRecipeDao.getAllRecipes()
             _recipes.value = recipes
+        }
+    }
+
+    fun removeFromFavourites(recipeId: Int) {
+        viewModelScope.launch() {
+            favouriteRecipeDao.delete(recipeId)
+            fetchFavouriteRecipes()
         }
     }
 }

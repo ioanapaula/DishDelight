@@ -17,8 +17,8 @@ interface FavouriteRecipeDao {
     @Update
     suspend fun update(recipe: FavouriteRecipe)
 
-    @Delete
-    suspend fun delete(recipe: FavouriteRecipe)
+    @Query("DELETE FROM $RECIPE_TABLE_NAME WHERE recipeId = :recipeId")
+    suspend fun delete(recipeId: Int)
 
     @Query("SELECT * FROM $RECIPE_TABLE_NAME")
     suspend fun getAllRecipes(): MutableList<FavouriteRecipe>
