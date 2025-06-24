@@ -4,14 +4,12 @@ coil = "2.7.0"
 converterGson = "2.11.0"
 gson = "2.11.0"
 kotlin = "2.1.20"
-coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.1"
 material = "1.12.0"
 lifecycleRuntimeKtx = "2.9.1"
-activityCompose = "1.8.0"
 composeBom = "2025.06.01"
 databindingRuntime = "8.10.1"
 navigationFragmentKtx = "2.9.0"
@@ -23,6 +21,7 @@ composeMaterial = "1.4.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.16.0" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
